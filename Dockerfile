@@ -8,6 +8,7 @@ RUN apt-get update \
     htop \
     locales \
     man \
+    wget \
     nano \
     git \
     procps \
