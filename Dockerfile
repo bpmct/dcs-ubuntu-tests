@@ -107,7 +107,7 @@ ENV RCLONE_DESTINATION=code-server-files
 ENV RCLONE_VSCODE_TASKS=true
 
 # chmod the code-server entrypoint we downloaded
-RUN chmod +x /usr/bin/entrypoint.sh
+RUN sudo chmod +x /usr/bin/entrypoint.sh
 
 # Use our custom entrypoint script first
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
