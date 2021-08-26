@@ -68,9 +68,9 @@ RUN sudo curl -fsSL https://deb.nodesource.com/setup_15.x | sudo bash -
 RUN sudo apt-get install -y nodejs
 RUN sudo wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 RUN sudo dpkg -i ./cloudflared-linux-amd64.deb
-# SSH
-RUN sudo apt install openssh-server
-RUN sudo service ssh start
+# SSH (commented out, you need a -y, and Docker doesn't support systemd by default so you would need to replace line 74 with "RUN openssh-server&" or something
+#RUN sudo apt install openssh-server
+#RUN sudo service ssh start
 
 #Packages
 RUN sudo apt-get install apt-utils -y
