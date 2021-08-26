@@ -39,7 +39,7 @@ RUN ARCH="$(dpkg --print-architecture)" && \
 RUN curl -fsSL https://code-server.dev/install.sh | VERSION=$VERSION sh
 
 # download the original entrypoint
-wget https://raw.githubusercontent.com/cdr/code-server/$VERSION/ci/release-image/entrypoint.sh --directory-prefix=/usr/bin
+RUN wget https://raw.githubusercontent.com/cdr/code-server/$VERSION/ci/release-image/entrypoint.sh --directory-prefix=/usr/bin
 
 # now the deploy-code-server stuff (potentially some overlap)
 
