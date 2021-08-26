@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+ENV VERSION=v3.11.1
+
 RUN apt-get update \
  && apt-get install -y \
     curl \
@@ -34,7 +36,10 @@ RUN ARCH="$(dpkg --print-architecture)" && \
     printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml
 
 # install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
+RUN curl -fsSL https://code-server.dev/install.sh | VERSION=$VERSION sh
+
+# download the original entrypoint
+wget https://raw.githubusercontent.com/cdr/code-server/$VERSION/ci/release-image/entrypoint.sh --directory-prefix=/usr/bin
 
 # now the deploy-code-server stuff (potentially some overlap)
 
