@@ -31,17 +31,11 @@ RUN ARCH="$(dpkg --print-architecture)" && \
     chmod 4755 /usr/local/bin/fixuid && \
     mkdir -p /etc/fixuid && \
     printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml
-    
-RUN cd /tmp && git clone https://github.com/cdr/code-server.git && \
-    cp /tmp/code-server/ci/release-image/entrypoint.sh /usr/bin/entrypoint.sh
 
 # install code-server
-RUN fetch "https://github.com/cdr/code-server/releases/download/v3.11.1/code-server_3.11.1_amd64.deb" "/tmp/code-server.deb" && \
-    sudo dpkg -i "/tmp/code-server.deb"
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# This way, if someone sets $DOCKER_USER, docker-exec will still work as
-# the uid will remain the same. note: only relevant if -u isn't passed to
-# docker-run.
+# now the deploy-code-server stuff (potentially some overlap)
 
 USER 1000
 ENV USER=coder
