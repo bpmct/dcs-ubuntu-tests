@@ -38,8 +38,9 @@ RUN ARCH="$(dpkg --print-architecture)" && \
 # install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | VERSION=$VERSION sh
 
-# download the original entrypoint
+# download the original code-server entrypoint
 RUN wget https://raw.githubusercontent.com/cdr/code-server/v$VERSION/ci/release-image/entrypoint.sh --directory-prefix=/usr/bin
+RUN sudo chmod +x /usr/bin/entrypoint.sh
 
 # now the deploy-code-server stuff (potentially some overlap)
 
@@ -105,9 +106,6 @@ ENV RCLONE_DATA=TRUE
 ENV RCLONE_SOURCE=/home/coder/project/downloads
 ENV RCLONE_DESTINATION=code-server-files
 ENV RCLONE_VSCODE_TASKS=true
-
-# chmod the code-server entrypoint we downloaded
-RUN sudo chmod +x /usr/bin/entrypoint.sh
 
 # Use our custom entrypoint script first
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
