@@ -33,7 +33,7 @@ RUN ARCH="$(dpkg --print-architecture)" && \
     printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml
     
 RUN cd /tmp && git clone https://github.com/cdr/code-server.git && \
-    cp ci/release-image/entrypoint.sh /usr/bin/entrypoint.sh
+    cp /tmp/code-server/ci/release-image/entrypoint.sh /usr/bin/entrypoint.sh
 
 # install code-server
 RUN fetch "https://github.com/cdr/code-server/releases/download/v3.11.1/code-server_3.11.1_amd64.deb" "/tmp/code-server.deb" && \
